@@ -1,0 +1,19 @@
+services:
+  php:
+    image: php:8.3-cli-alpine
+    volumes:
+      - ./test.php:/var/www/test.php
+    command:
+      - php
+      - /var/www/test.php
+    links:
+      - sleep-tcp
+  sleep-tcp:
+    image: php:8.3-cli-alpine
+    command:
+      - php
+      - -S
+      - 0.0.0.0:80
+      - /var/www/sleep.php
+    volumes:
+      - ./sleep.php:/var/www/sleep.php
